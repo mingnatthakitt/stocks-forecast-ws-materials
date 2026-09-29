@@ -1,0 +1,36 @@
+# Dedicated conda environment for the "Can AI Predict the Market?" workshop.
+#
+# Everything comes from conda-forge so torch and xgboost share ONE OpenMP
+# runtime (llvm-openmp) — mixing a conda torch with a pip xgboost (or vice
+# versa) can segfault the kernel when both are loaded in the same process.
+#
+#   conda env create -f environment.yml
+#   conda activate stocks-ml
+#   python -m ipykernel install --user --name stocks-ml   # for Jupyter
+#
+# A fully pinned snapshot of a known-good solve lives in environment.lock.yml
+# (regenerate with `conda env export -n stocks-ml > environment.lock.yml`), and
+# requirements.txt holds the pip equivalent for venv/Colab-style setups.
+name: stocks-ml
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pandas>=2.2
+  - numpy>=1.26
+  - scikit-learn>=1.5
+  - xgboost>=2.1
+  - pytorch>=2.3            # conda-forge build → shares conda-forge llvm-openmp (CPU on macOS)
+  - matplotlib>=3.9
+  - jupyterlab
+  - ipykernel
+  - nbformat
+  - nbclient
+  - nbconvert
+  - yfinance>=0.2.40
+  - joblib>=1.3
+  - pip
+  - fastapi>=0.110        # collect.py: LAN submission collector
+  - uvicorn>=0.29
+  - python-multipart
+  - qrcode              # collect.py --qr: scannable upload URL for phones

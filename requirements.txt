@@ -1,0 +1,37 @@
+# stocks-ml — pip equivalent of environment.yml (for venv / LINUX / Colab-style setups). A synced copy lives in participant/requirements.txt.
+#
+# ⚠️ macOS users: DO NOT install this with pip — pip wheels of torch and xgboost
+# bundle conflicting OpenMP runtimes on macOS and crash when loaded into one
+# process (the notebook needs both). On macOS use the conda path instead:
+#
+#     conda env create -f environment.yml && conda activate stocks-ml
+#
+# For a conda workflow prefer environment.yml anyway (all conda-forge; torch and
+# xgboost then share one OpenMP runtime). environment.lock.yml holds the full
+# conda lockfile of a known-good solve.
+#
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements.txt
+#   python -m ipykernel install --user --name stocks-ml   # for Jupyter
+#
+# NOTE for Jupyter users: keep the import order xgboost-before-torch if you mix
+# pip builds (the starter notebook's setup cell already does this).
+
+pandas==3.0.6
+numpy==2.5.3
+scikit-learn==1.9.1
+# xgboost is pinned to 3.4.1: PyPI's latest; conda-forge ships 3.4.2 (see lockfile).
+xgboost==3.4.1
+torch==2.13.0
+matplotlib==3.11.2
+yfinance==1.7.0
+joblib==1.6.0
+ipykernel==7.3.0
+fastapi==0.141.1
+uvicorn==0.54.0
+python-multipart==0.0.22
+qrcode==8.2
+nbformat==5.11.1
+nbclient==0.11.0
+nbconvert==7.17.1
+jupyterlab==4.6.4

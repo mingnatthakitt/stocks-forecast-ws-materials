@@ -1,0 +1,12 @@
+{
+  "team": "EXAMPLE-TEAM",
+  "round": 1,
+  "arch": "xgboost",
+  "features": ["return_1d", "return_5d", "sma_ratio_5_20", "rsi_14", "volatility_20", "is_NVDA", "is_TSLA"],
+  "params": { "n_estimators": 200, "max_depth": 4, "learning_rate": 0.05, "subsample": 0.9, "random_state": 42 },
+  "seq_len": null,
+  "scaler": null,
+  "model_file": "model.pkl",
+  "trained_on": "2014-01-02..2024-12-31 (panel: SPY NVDA AAPL MSFT TSLA)",
+  "val_mae": 0.999999
+}

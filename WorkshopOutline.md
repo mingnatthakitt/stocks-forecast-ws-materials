@@ -19,7 +19,9 @@ The workshop has two competition rounds:
 1. **Human-only optimisation**
 2. **Human + AI optimisation**
 
-Both models are evaluated against the **same private 2025 competition dataset**, allowing participants to directly observe what AI-assisted development changed and whether those changes actually improved performance.
+Round 1 and Round 2 submissions are evaluated against the **same private 2025
+competition dataset**. Teams that submit in both rounds can compare their own
+scores on the board; comparisons across different teams do not isolate AI's effect.
 
 The workshop focuses on machine learning, time-series validation, model development, feature engineering, hyperparameter tuning, AI-assisted coding, and critical evaluation.
 
@@ -62,18 +64,15 @@ Participants will build models, evaluate them on unseen historical market data, 
 
 # 4. Dataset Design
 
-All teams receive the same historical market dataset.
-
-The tentative dataset period is:
+All teams receive the same historical dataset: daily, adjusted OHLCV data for
+**SPY, NVDA, AAPL, MSFT, and TSLA**. The shipped workshop uses these fixed periods:
 
 | Period | Purpose | Visible to participants? |
 |---|---|---|
 | **2014–2022** | Model training | Yes |
 | **2023–2024** | Validation and tuning | Yes |
-| **2025** | Private competition benchmark | Features only / labels hidden |
-| **2026 holdout** | Optional final generalisation demonstration | Completely hidden until end |
-
-The exact stock, ETF, or fixed basket of assets can be finalised while preparing the workshop.
+| **2025** | Private competition benchmark | No; organisers pass features to the submission for scoring and keep labels private |
+| **2026 YTD** | Surprise generalisation holdout | No during either round; revealed at the end |
 
 The dataset will primarily contain standard OHLCV market data:
 
@@ -121,14 +120,14 @@ Direction = \begin{cases} 1 & r_{t+1}>0 \\ 0 & r_{t+1}\le0 \end{cases}
 $$
 
 
-The primary competition metric can be **MAE**, with directional accuracy and other metrics shown as additional diagnostics.
+The primary competition metric is **MAE pooled across all five tickers** (lower is better). RMSE, directional accuracy, and per-ticker MAE are diagnostics.
 
 ---
 
 # 6. Workshop Flow
 
 ## Part 1 — Opening Challenge
-**~10 minutes**
+**~6 minutes**
 
 Start by showing participants several historical stock charts with the future portion hidden.
 
@@ -147,7 +146,7 @@ We then introduce the day's challenge.
 ---
 
 # 7. Part 2 — What Does “Predicting a Stock” Mean?
-**~15 minutes**
+**~13 minutes**
 
 Brief introduction to:
 
@@ -188,7 +187,7 @@ This allows participants to determine whether their more complicated model actua
 ---
 
 # 8. Part 3 — Model Crash Course
-**~25 minutes**
+**~16 minutes**
 
 Participants receive a short conceptual introduction to several model families.
 
@@ -330,7 +329,7 @@ This gives teams an opportunity to test less obvious approaches.
 ---
 
 # 9. Part 4 — Feature Engineering and Data Leakage
-**~15 minutes**
+**~7 minutes**
 
 Participants are introduced to basic financial features.
 
@@ -394,17 +393,20 @@ Walk-forward validation can also be briefly discussed.
 ---
 
 # 10. Part 5 — Competition Briefing
-**~10 minutes**
+**~6 minutes**
 
 Participants form teams of approximately **3–5 people**.
 
-Each team works with **two model architectures**.
-
-To prevent every team simply selecting the same architecture, we can run a small **model draft**.
+Teams choose a **primary** and **secondary** model to focus their tuning on. Focus
+slots guide exploration; they do not restrict which trained model a team may
+submit. The notebook includes five starter candidates: Ridge, Random Forest,
+XGBoost, LSTM, and one wildcard selected as GRU or CNN. The standard Colab/Conda
+setup trains all five; a macOS pip venv skips XGBoost. Any available candidate may
+be submitted if it has the best validation MAE.
 
 Example:
 
-| Architecture | Suggested maximum primary teams |
+| Architecture | Suggested primary focus slots |
 |---|---:|
 | Linear / Ridge | 2 |
 | Random Forest | 2 |
@@ -417,7 +419,8 @@ Each team selects:
 - **Primary model**
 - **Secondary model**
 
-Their final submission can use whichever performs better during their own validation.
+These slots only guide which models teams focus on; they do not limit what a team
+can train or submit.
 
 ---
 
@@ -482,7 +485,7 @@ Advanced teams can implement additional features or modify permitted parts of th
 ---
 
 # 12. ROUND 1 — Human-Only Optimisation
-**~30 minutes**
+**~20 minutes**
 
 During Round 1:
 
@@ -590,7 +593,7 @@ Participants see their scores but **not the actual 2025 labels**.
 ---
 
 # 15. ROUND 2 — AI Unlocked
-**~20 minutes**
+**~16 minutes**
 
 After the first evaluation:
 
@@ -662,11 +665,14 @@ We want participants to understand **what the AI changed and why**.
 ---
 
 # 17. ROUND 2 — Same 2025 Evaluation
-**~10 minutes**
+**~8 minutes**
 
 Teams submit their AI-assisted model.
 
 The models are evaluated against **exactly the same private 2025 competition dataset**.
+
+Illustrative paired example only; compare each team's own Round 1 and Round 2
+scores on the live board. Teams that submit in only one round cannot be paired.
 
 Example:
 
@@ -708,9 +714,11 @@ Therefore:
 
 ---
 
-# 19. Optional Surprise Generalisation Test
+# 19. 2026 Holdout Reveal
 
-If preparation time allows, both models can also be evaluated on a completely untouched **2026 holdout dataset**.
+After both rounds, reveal the prepared **2026 year-to-date holdout**. It is hidden
+from teams during optimisation. Run the evaluation live if time allows; otherwise
+precompute it and reveal the result on slide 38.
 
 Teams would not know about its results during either optimisation phase.
 
@@ -720,14 +728,19 @@ Human Model ───────┐
 AI Model ──────────┘
 ```
 
-For example:
+The prepared demo rows are from different teams and models, so they illustrate
+the board format but are **not a paired AI comparison**:
 
 ```text
-                   2025        Unseen 2026
+                   2025        2026 holdout
 
-Human model        0.0128      0.0131
-Human + AI         0.0114      0.0145
+Predict 0           0.01621     0.01500
+Team Example · R1   0.01598     0.01517
+Team Seq · R2       0.01624     0.01534
 ```
+
+For a within-team comparison, use the Round 1 and Round 2 rows with the same team
+name when both are present.
 
 This creates an important discussion:
 
@@ -738,7 +751,7 @@ The 2026 evaluation would primarily be a **teaching demonstration**, rather than
 ---
 
 # 20. Historical Paper-Trading Simulation
-**~10–15 minutes**
+**Included in the 8-minute results block**
 
 After evaluating forecasting performance, models can be passed through a simple historical paper-trading simulation.
 
@@ -870,28 +883,26 @@ Real financial systems must also consider risk, costs, market changes, and uncer
 
 ---
 
-# 23. Proposed 3-Hour Schedule
+# 23. Live 2-Hour Schedule
 
 | Time | Activity |
 |---|---|
-| **0:00–0:08** | Opening market prediction challenge |
-| **0:08–0:20** | Stock forecasting and ML fundamentals |
-| **0:20–0:32** | Model and Features crash course |
-| **0:32–0:40** | Competition briefing + team/model selection |
-| **0:40–1:00** | Round 1 — Human-only optimisation |
-| **1:00–1:10** | Private 2025 evaluation + leaderboard |
-| **1:10–1:28** | Round 2 — AI-assisted optimisation |
-| **1:28–1:38** | Second 2025 evaluation + leaderboard |
+| **0:00–0:06** | Opening market prediction challenge |
+| **0:06–0:19** | Forecasting and ML fundamentals |
+| **0:19–0:42** | Model and feature crash course |
+| **0:42–0:48** | Team briefing and notebook tour |
+| **0:48–1:08** | Round 1 — human-only optimisation |
+| **1:08–1:18** | Private 2025 evaluation and leaderboard |
+| **1:18–1:34** | Round 2 — AI-assisted optimisation |
+| **1:34–1:42** | Round 2 evaluation, paper trading, and 2026 holdout reveal |
+| **1:42–1:50** | Debrief |
+| **1:50–2:00** | Conclusion and winner announcement |
 
-> **Superseded — do not run the workshop from this table.** This is the original
-> proposed schedule. The shipped deck is 42 slides with a longer teaching block
-> (the fundamentals and crash-course sections were expanded for a room with little
-> or no coding/ML background), so Round 1 now starts at 0:48 and Round 2 ends at
-> 1:34. `FACILITATOR_GUIDE.md` §3 is the live run of show.
-| **1:38-1:50** | Generalisation and Paper-trading |
-| **1:50–2:00** | Results and Takeaways |
+This is the live run of show; see `FACILITATOR_GUIDE.md` §3 for delivery notes.
 
-A short buffer can be incorporated by slightly reducing competition or discussion time depending on venue restrictions.
+**Competition block: 0:42–1:42 (60 minutes total)** — 6 minutes for briefing,
+36 minutes of model optimisation (20 + 16), and 18 minutes for evaluation and
+results (10 + 8).
 
 ---
 
@@ -966,7 +977,7 @@ Organisers will prepare:
 - Clean historical OHLCV dataset
 - 2014–2024 participant dataset
 - Private 2025 targets
-- Optional private 2026 holdout
+- Private 2026 YTD holdout, kept hidden until the final reveal
 
 ### Starter notebook
 
@@ -1021,7 +1032,7 @@ Speaking sections can be divided between the two organisers rather than assignin
 
 ### Additional facilitators
 
-Ideally several InnoWing / student facilitators can circulate between teams during the practical sessions.
+Ideally several event and student facilitators can circulate between teams during the practical sessions.
 
 Responsibilities:
 
@@ -1036,14 +1047,14 @@ Approximately one facilitator per 2–3 teams would be ideal, although the works
 
 # 28. Venue Requirements
 
-For InnoWing, the workshop would require:
+For a workshop held at HKU InnoWing, plan for:
 
 - Room for approximately **20–30 participants**
 - Team-style seating
 - Projector / presentation display
 - Stable Wi-Fi
 - Power outlets or extension cables
-- Space for approximately **4–8 teams**
+- Space for approximately **4–10 teams**
 - Approximately **2 hours of venue access**, preferably with some setup/cleanup time around the session
 
 Participants should bring their own laptops.
@@ -1112,7 +1123,7 @@ The financial-market setting is used as an engaging real-world dataset for teach
              Features + Time-Series Leakage
                           │
                           ▼
-                  TEAM MODEL DRAFT
+               TEAM MODEL FOCUS SLOTS
                           │
                           ▼
                ROUND 1 — HUMAN ONLY

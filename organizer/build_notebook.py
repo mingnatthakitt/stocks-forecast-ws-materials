@@ -772,7 +772,8 @@ submission_<TEAM>_round<N>.zip
 
 Notes
 - The final model is **retrained on 2014–2024** (train + validation) with your best
-  settings — no reason to leave 2 years of data on the table for the final model.
+  settings. More observations may help, but market regimes change, so retraining
+  on more data does not guarantee better future performance.
 - **Round 1:** run this with `ROUND = 1`. **Round 2:** after AI-assisted changes,
   run it again with `ROUND = 2`. Both zips coexist — name your team the same.
 """)
@@ -914,10 +915,13 @@ changes to features, hyperparameters and regularisation, explain the ML reasonin
 for each, and warn me where a change risks overfitting. Do not suggest looking at
 the 2025 data.\"\"\")""")
 
-md("""### 📋 AI change log — fill this in BEFORE exporting Model V2
+md("""### 📋 AI change log — fill this in during Round 2
 
 *The workshop is not measuring whether AI can write your model. It is measuring
 **what you changed and why**. Every accepted/rejected suggestion goes here.*
+
+This log stays in the notebook and is **not included in the submission ZIP**.
+Keep the notebook available for the debrief.
 
 ```text
 AI suggested:

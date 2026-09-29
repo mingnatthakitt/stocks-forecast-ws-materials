@@ -97,8 +97,9 @@ feature. Rolling windows are fine.
 **Round 1 — human only.** ✅ slides, cheatsheet, docs, teammates, facilitators.
 ❌ ChatGPT, Claude, Gemini, Copilot, any generative AI.
 
-**Round 2 — AI unlocked.** Document every AI suggestion: ✓ accepted (why) /
-✗ rejected (why). Re-export with `ROUND = 2`.
+**Round 2 — AI unlocked.** Document every AI suggestion in the notebook's change log:
+✓ accepted (why) / ✗ rejected (why). The log is not in the model ZIP; keep it for the
+debrief. Re-export with `ROUND = 2`.
 
 **Always:** same dataset, same split (locked in the notebook), fixed seeds, no
 touching `organizer/` files, no NaN predictions (predict `0.0` for cold-start rows).

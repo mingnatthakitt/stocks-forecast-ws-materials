@@ -175,10 +175,10 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
 
 <!-- ============ 0 · TITLE ============ -->
 <section class="slide center" data-chip="0:00 · opening" data-title="Title">
-  <div class="kicker">HKU InnoWing · hands-on ML workshop · 2 hours</div>
+  <div class="kicker">Hands-on ML workshop · 2 hours</div>
   <h1>CAN <span class="g">AI</span> PREDICT<br>THE <span class="y">MARKET</span><span class="cursor"></span></h1>
   <p class="lead dim" style="margin-top:26px">Build a stock-forecasting model. Survive a private 2025 test set.<br>
-  Then let AI take over — and find out if it actually helped.</p>
+  Then work with an AI adviser and test whether its suggestions help.</p>
   <div class="tape" style="margin-top:44px"><div>
     <b>SPY · NVDA · AAPL · MSFT · TSLA · 2014–2024</b> &nbsp;·&nbsp; your data &nbsp;·&nbsp; <b>2025</b> <span class="r">🔒 private test</span> &nbsp;·&nbsp;
     RIDGE <span class="g">underdog</span> &nbsp;·&nbsp; RANDOM&nbsp;FOREST <span class="g">robust</span> &nbsp;·&nbsp;
@@ -200,7 +200,7 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
       craft features, fight overfitting — with your own brain.</p>
     </div>
     <div class="panel">
-      <span class="pill y">round 2 · 18 min</span><span class="pill g">🤖 AI unlocked</span>
+      <span class="pill y">round 2 · 16 min</span><span class="pill g">🤖 AI unlocked</span>
       <h3 style="margin:10px 0 6px">Human + AI optimisation</h3>
       <p class="dim small">ChatGPT / Claude / Gemini are now legal. Prompt them, evaluate their
       suggestions, keep what works — and log <i>why</i>.</p>
@@ -471,8 +471,8 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
 <section class="slide" data-chip="0:20 · crash course" data-title="Ridge, in plain terms">
   <h2><span class="tag">model A · plain terms</span>Ridge is a line through the data</h2>
   <div class="panel mono center" style="font-size:clamp(13px,1.5vw,18px);line-height:1.95">
-    12 features <span class="dim">→</span> 12 multipliers <span class="dim">→</span> add them up <span class="dim">→</span> <b class="y">one number</b><br>
-    <span class="dim small">"if yesterday's return was +2%, and its weight is 0.3, add +0.6% — then repeat for the other 11"</span>
+    15 features <span class="dim">→</span> 15 multipliers <span class="dim">→</span> add them up <span class="dim">→</span> <b class="y">one number</b><br>
+    <span class="dim small">"if yesterday's return was +2%, and its weight is 0.3, add +0.6% — then repeat for the other 14"</span>
   </div>
   <div class="cols" style="margin-top:20px">
     <div class="edge can">
@@ -656,7 +656,7 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
     </div>
   </div>
   <p class="lead" style="margin-top:26px">In the notebook, set <code>WILDCARD_ARCH = "gru"</code> or <code>"cnn"</code> — one line switches the whole model.</p>
-  <p class="dim small" style="margin-top:10px">Draft rule: wildcard slots are capped — choosing the road less travelled has its privileges.</p>
+  <p class="dim small" style="margin-top:10px">Focus slots help spread exploration; they do not restrict which model you may submit.</p>
 </section>
 
 <!-- ============ MODEL E · DEEP DIVE ============ -->
@@ -714,7 +714,7 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
     <tr class="pickrow">
       <td class="y">Wildcard</td>
       <td class="when">you want to be the team that tried something different (and <i>survived</i> it)</td>
-      <td class="avoid">the draft is full and a safe model is worth more to you</td>
+      <td class="avoid">time is short — a simpler model is easier to tune and explain</td>
     </tr>
   </table>
   <div class="edge" style="margin-top:20px;border-color:rgba(245,196,81,.4)">
@@ -784,21 +784,21 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
 
 <!-- ============ 18 · BRIEFING ============ -->
 <section class="slide" data-chip="0:42 · briefing" data-title="Competition briefing">
-  <h2><span class="tag">0:32 · briefing</span>Form teams. Draft your models.</h2>
+  <h2><span class="tag">0:42 · briefing</span>Form teams. Choose a model focus.</h2>
   <div class="cols">
     <div>
       <ul>
         <li>Teams of <b>3–5</b>, one shared notebook</li>
-        <li>Pick a <b>primary</b> + <b>secondary</b> architecture</li>
+        <li>Pick a <b>primary</b> + <b>secondary</b> architecture to focus on</li>
         <li>Final submission = whichever wins on <b>your validation</b></li>
         <li>Name your team — you'll keep it both rounds</li>
       </ul>
       <p class="small dim" style="margin-top:14px">Facilitators float — flag them down early and often.</p>
     </div>
     <div class="panel small">
-      <b class="y">Model draft caps</b> <span class="dim">(first come, first served)</span>
+      <b class="y">Model focus slots</b> <span class="dim">(first come, first served)</span>
       <table style="margin-top:10px">
-        <tr><th>Architecture</th><th class="num">Max teams</th></tr>
+        <tr><th>Architecture</th><th class="num">Focus slots</th></tr>
         <tr><td>Ridge</td><td class="num">2</td></tr>
         <tr><td>Random Forest</td><td class="num">2</td></tr>
         <tr><td>XGBoost</td><td class="num">3</td></tr>
@@ -807,11 +807,12 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
       </table>
     </div>
   </div>
+  <p class="small dim" style="margin-top:14px;text-align:center">Competition block: 60 min total (0:42–1:42) · 36 min to tune. Five starter candidates; focus slots guide tuning. Submit your best available candidate by validation MAE.</p>
 </section>
 
 <!-- ============ 19 · NOTEBOOK TOUR ============ -->
 <section class="slide" data-chip="0:42 · briefing" data-title="Notebook tour">
-  <h2><span class="tag">0:32 · briefing</span>Your notebook, section by section</h2>
+  <h2><span class="tag">0:42 · briefing</span>Your notebook, section by section</h2>
   <div class="cols">
     <div class="panel mono small" style="line-height:2">
       <span class="g">1 · meet the data</span><br>
@@ -835,7 +836,7 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
 
 <!-- ============ 20 · ROUND 1 ============ -->
 <section class="slide center" data-chip="0:48 · ROUND 1" data-title="Round 1 kickoff">
-  <div class="kicker" style="color:var(--red)">0:40–1:00 · round 1</div>
+  <div class="kicker" style="color:var(--red)">0:48–1:08 · round 1</div>
   <h1 style="font-size:clamp(44px,7vw,90px)">HUMAN <span class="y">ONLY</span></h1>
   <p class="lead" style="margin-top:24px">Train, tune, iterate. Beat the baseline. Beat the other teams.</p>
   <div class="panel" style="margin-top:30px;max-width:820px;text-align:left">
@@ -847,7 +848,7 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
         <li class="warn">any generative AI</li><li class="warn">the 2025 labels (obviously)</li></ul></div>
     </div>
   </div>
-  <p class="dim small" style="margin-top:18px">At 1:00 sharp: run the <b>export cell</b> with <code>ROUND = 1</code> and hand in your zip. No zip = no leaderboard.</p>
+  <p class="dim small" style="margin-top:18px">At 1:08: run the <b>export cell</b> with <code>ROUND = 1</code> and hand in your zip. No zip = no leaderboard.</p>
   <p class="small" style="margin-top:20px"><b class="y">Hand-in:</b>
     <span style="color:var(--green)">http://&lt;organiser-laptop&gt;:8000/</span>
     &nbsp;·&nbsp; PIN <span style="color:var(--green)">____</span>
@@ -857,7 +858,7 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
 
 <!-- ============ 21 · METRICS ============ -->
 <section class="slide" data-chip="1:08 · evaluation" data-title="How you're scored">
-  <h2><span class="tag">1:00 · private 2025 evaluation</span>How you're scored</h2>
+  <h2><span class="tag">1:08 · private 2025 evaluation</span>How you're scored</h2>
   <div class="grid3">
     <div class="panel center">
       <div class="big g" style="font-size:clamp(30px,4vw,52px)">MAE</div>
@@ -877,23 +878,23 @@ svg.chart{width:100%;height:auto;background:var(--panel2);border:1px solid var(-
 
 <!-- ============ 22 · AI UNLOCKED ============ -->
 <section class="slide center" data-chip="1:18 · ROUND 2" data-title="AI unlocked">
-  <div class="kicker" style="color:var(--gold)">1:10–1:28 · round 2</div>
+  <div class="kicker" style="color:var(--gold)">1:18–1:34 · round 2</div>
   <h1 style="font-size:clamp(44px,7vw,90px)">🤖 <span class="g">AI</span> UNLOCKED</h1>
   <p class="lead" style="margin-top:24px">Same task. New teammate with infinite confidence and questionable taste.</p>
   <ul style="max-width:760px;text-align:left;margin:26px auto 0" class="small">
     <li>Feed the AI your <b>code, params, validation scores and Round-1 2025 score</b> — the prompt cell writes it for you</li>
     <li>Implement <b>selectively</b> — you are the engineer, it is the consultant</li>
     <li>Log every suggestion: <span class="g">✓ accepted + why</span> · <span class="r">✗ rejected + why</span></li>
-    <li>Re-export with <code>ROUND = 2</code> before 1:28</li>
+    <li>Re-export with <code>ROUND = 2</code> before 1:34</li>
   </ul>
   <p class="dim small" style="margin-top:20px">The workshop isn't measuring whether AI can write your model.<br>It's measuring <b>what you changed, and whether you understood why</b>.</p>
-  <p class="small" style="margin-top:18px"><b class="y">Re-upload at 1:28:</b>
+  <p class="small" style="margin-top:18px"><b class="y">Re-upload at 1:34:</b>
     same page, same PIN — pick <b>Round 2</b> this time, same team name.</p>
 </section>
 
 <!-- ============ 23 · AI PROMPT ============ -->
 <section class="slide" data-chip="1:21 · ROUND 2" data-title="The AI prompt">
-  <h2><span class="tag">1:10 · round 2</span>Prompt like an engineer</h2>
+  <h2><span class="tag">1:18 · round 2</span>Prompt like an engineer</h2>
   <div class="panel mono small" style="line-height:1.9;white-space:pre-wrap">Model: <span class="y">XGBoost</span>
 Training period: 2014–2022 · Validation: 2023–2024
 Validation MAE: <span class="y">0.0153</span>  (baseline "predict 0": 0.0154)
@@ -911,7 +912,7 @@ overfitting.</span></div>
 
 <!-- ============ 24 · CHANGE LOG ============ -->
 <section class="slide" data-chip="1:24 · ROUND 2" data-title="AI change log">
-  <h2><span class="tag">1:10 · round 2</span>The change log is mandatory</h2>
+  <h2><span class="tag">1:18 · round 2</span>The change log is mandatory</h2>
   <div class="panel mono small" style="line-height:1.95">AI suggested:
 <span class="g">✓</span> reduce max_depth 8 → 4            <span class="dim">— accepted, val MAE improved</span>
 <span class="g">✓</span> add early stopping                 <span class="dim">— accepted</span>
@@ -922,7 +923,7 @@ overfitting.</span></div>
 <span class="y">What we actually changed:</span>
 - max_depth 8 → 4            <span class="dim">val MAE 0.0156 → 0.0153</span>
 - removed sma_ratio_5_20     <span class="dim">val MAE 0.0153 → 0.0153 (kept: simpler)</span></div>
-  <p class="lead" style="margin-top:22px">Judgement is the skill. Anyone can paste suggestions — <b>knowing which to refuse</b> is the exercise.</p>
+  <p class="lead" style="margin-top:22px">The log stays in your notebook, not the model ZIP. Keep it for the debrief. Anyone can paste suggestions — <b>choosing what to refuse</b> is the exercise.</p>
 </section>
 
 <!-- ============ 25 · BENCHMARK OVERFITTING ============ -->
@@ -948,7 +949,7 @@ overfitting.</span></div>
 
 <!-- ============ 26 · PAPER TRADING ============ -->
 <section class="slide" data-chip="1:34 · trading" data-title="Paper trading">
-  <h2><span class="tag">1:28 · paper trading</span>A prediction is <span class="r">not</span> a trading algorithm</h2>
+  <h2><span class="tag">1:34 · paper trading</span>A prediction is <span class="r">not</span> a trading algorithm</h2>
   <div class="cols">
     <div class="panel small">
       <b class="g">An ML prediction is…</b>
@@ -970,30 +971,29 @@ overfitting.</span></div>
       <p class="dim small" style="margin-top:8px">…and at just 10 bps per trade, the GRU's churn drops it to <b>+19.6%</b>.</p>
     </div>
   </div>
-  <p class="lead" style="margin-top:20px;text-align:center">Lower error ≠ more money. The <i>worst</i>-MAE model printed the best paper P&amp;L —
-  and paid it all back in costs. <span class="g">Accuracy</span> and <span class="y">profit</span> are different objectives.</p>
+  <p class="lead" style="margin-top:20px;text-align:center">Lower error ≠ more money. The <i>worst</i>-MAE model had the best zero-cost paper return, but trading costs removed its advantage over the forest. <span class="g">Accuracy</span> and <span class="y">profit</span> are different objectives.</p>
   <p class="dim small" style="margin-top:14px;text-align:center">100% historical. 100% virtual. Nobody is getting investment advice today — quite the opposite.</p>
 </section>
 
 <!-- ============ 27 · HOLDOUT ============ -->
 <section class="slide" data-chip="1:34 · trading" data-title="Surprise holdout">
-  <h2><span class="tag">1:28 · the twist</span>🔮 The 2026 holdout</h2>
+  <h2><span class="tag">1:34 · the twist</span>🔮 The 2026 holdout</h2>
   <p class="lead">Everything so far — both rounds, both leaderboards — was scored on <b>2025</b>.
   A dataset nobody has optimised against exists: <b class="y">2026</b>, revealed only now.</p>
-  <div class="panel mono small" style="margin-top:24px;line-height:2;text-align:center">
-    <span class="dim">this is the prepared demo's real result — the live board is rebuilt from everyone's zips:</span><br><br>
+  <div class="panel mono small" style="margin-top:18px;line-height:2;text-align:center">
+    <span class="dim">prepared demo submissions from different teams and models:</span><br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025&nbsp;&nbsp;&nbsp;&nbsp;2026<br>
     predict 0.0&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">0.01621</span>&nbsp;&nbsp;&nbsp;<span class="dim">0.01500</span><br>
-    human model&nbsp;&nbsp;&nbsp;<span class="y">0.01598</span>&nbsp;&nbsp;&nbsp;<span class="y">0.01517</span><br>
-    human + AI&nbsp;&nbsp;&nbsp;&nbsp;<span class="g">0.01624</span>&nbsp;&nbsp;&nbsp;<span class="r">0.01534</span>
+    Forest · Team Example · R1&nbsp;&nbsp;<span class="y">0.01598</span>&nbsp;&nbsp;&nbsp;<span class="y">0.01517</span><br>
+    GRU · Team Seq · R2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="g">0.01624</span>&nbsp;&nbsp;&nbsp;<span class="r">0.01534</span>
   </div>
-  <p class="lead" style="margin-top:24px">Did AI make your model <b class="g">genuinely better</b> —
-  or just <b class="r">better at the benchmark</b>?</p>
+  <p class="dim small" style="margin-top:12px;text-align:center">These demo rows are not a paired AI comparison. Use each team's Round 1 and Round 2 rows on the live board to compare its scores.</p>
+  <p class="lead" style="margin-top:16px">Did any 2025 gains transfer to the unseen <b class="y">2026 period</b>?</p>
 </section>
 
 <!-- ============ 28 · DISCUSSION ============ -->
 <section class="slide" data-chip="1:42 · debrief" data-title="Discussion">
-  <h2><span class="tag">1:38 · debrief</span>What actually happened?</h2>
+  <h2><span class="tag">1:42 · debrief</span>What actually happened?</h2>
   <div class="grid2 small">
     <div class="panel"><b class="g">About the models</b>
       <ul style="margin-top:8px">
@@ -1003,7 +1003,7 @@ overfitting.</span></div>
         <li>Who overfit — and how did you notice?</li></ul></div>
     <div class="panel"><b class="y">About the AI</b>
       <ul style="margin-top:8px">
-        <li>Did AI suggestions consistently help?</li>
+        <li>For teams in both rounds, did AI suggestions help?</li>
         <li>What did you (rightly) refuse?</li>
         <li>Did 2025 gains survive 2026?</li>
         <li>Would you trust AI with real money? Why not?</li></ul></div>
@@ -1013,7 +1013,7 @@ overfitting.</span></div>
 
 <!-- ============ 29 · TAKEAWAYS ============ -->
 <section class="slide" data-chip="1:42 · debrief" data-title="Takeaways">
-  <h2><span class="tag">1:38 · debrief</span>Eight things to keep</h2>
+  <h2><span class="tag">1:42 · debrief</span>Eight things to keep</h2>
   <div class="grid2 small" style="gap:14px">
     <div class="panel small"><b class="g">1 · Architecture matters</b><p class="dim">different assumptions, different failure modes</p></div>
     <div class="panel small"><b class="g">2 · Data matters</b><p class="dim">leaked data makes evaluation theatre</p></div>
@@ -1053,7 +1053,7 @@ overfitting.</span></div>
     advice; past patterns do not guarantee future returns. No real money was — or should be —
     involved.
   </div>
-  <p class="mono dim" style="margin-top:26px">HKU InnoWing · Can AI Predict the Market? · <span id="endtick">SPY ▲ loading…</span></p>
+  <p class="mono dim" style="margin-top:26px">Venue: HKU InnoWing · Can AI Predict the Market? · <span id="endtick">SPY ▲ loading…</span></p>
 </section>
 
 <script>

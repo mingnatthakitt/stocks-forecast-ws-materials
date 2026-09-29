@@ -12,6 +12,7 @@ repository belongs to the organisers — you can ignore it.
 | `CHEATSHEET.md` | One-page quick reference: feature menu, hyperparameter dials, rules, export checklist | **During Round 1 & 2** (it's competition-legal) |
 | `SETUP_VENV.md` | Local install guide for VS Code + venv users (macOS caveats included) | Only if not using Colab |
 | `requirements.txt` | Pinned packages for the local venv install | Used by SETUP_VENV.md |
+| `requirements-macos.txt` | Pinned local packages for macOS venv; omits XGBoost to avoid the torch/OpenMP conflict | Used by SETUP_VENV.md on macOS |
 | `data/workshop_participant.csv` | The dataset: OHLCV for **SPY, NVDA, AAPL, MSFT, TSLA**, 2014–2024, split-adjusted | Loaded by the notebook automatically |
 | `exports/` | Example submission zips produced by the export cell (so you know what "done" looks like) | Reference only |
 
@@ -35,14 +36,18 @@ Follow **[SETUP_VENV.md](SETUP_VENV.md)** — a step-by-step guide for creating 
 
 ## The competition in 60 seconds
 
+- **Competition block: 0:42–1:42 (60 minutes total):** 6 minutes for briefing,
+  36 minutes to work across both rounds (20 + 16), and 18 minutes for evaluation
+  and results.
 - **Task:** predict each ticker's **next-day return**. Primary metric: **MAE**, pooled
   over all five tickers (lower = better).
 - **The bar:** "always predict 0" scores ≈ **0.0162** on the private 2025 set. Beating
   that is the whole game.
 - **Round 1 (0:48–1:08) — human only.** No ChatGPT/Claude/Gemini/Copilot. Slides,
   cheatsheet, docs, teammates and facilitators are allowed.
-- **Round 2 (1:18–1:34) — AI unlocked.** Use AI, but log what it suggested and what
-  you actually changed. Re-export with `ROUND = 2`.
+- **Round 2 (1:18–1:34) — AI unlocked.** Use AI, then record suggestions and changes
+  in the notebook's change log. The log is not in the model ZIP; keep the notebook
+  available for the debrief. Re-export with `ROUND = 2`.
 - **Hand-in:** run the 📦 export cell → upload the zip it produces at the **submission
   link and PIN on the whiteboard** (a page on the facilitator's laptop; you can use
   your phone). Type your team name exactly as agreed, pick your round, press upload.

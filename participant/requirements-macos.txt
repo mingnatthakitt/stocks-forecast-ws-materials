@@ -1,0 +1,11 @@
+# macOS participant venv dependencies.
+# Deliberately omits xgboost because its pip wheel conflicts with torch's
+# OpenMP runtime on macOS. Use Colab or Miniforge for the XGBoost candidate.
+pandas==3.0.6
+numpy==2.5.3
+scikit-learn==1.9.1
+torch==2.13.0
+matplotlib==3.11.2
+yfinance==1.7.0
+joblib==1.6.0
+ipykernel==7.3.0

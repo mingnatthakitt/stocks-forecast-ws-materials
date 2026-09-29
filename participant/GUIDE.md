@@ -97,8 +97,8 @@ Why not shuffle-split? A shuffled split lets the model train on 2021 and be test
 2019 — it effectively sees the future of its own test set. Scores look fantastic and
 mean nothing. The split cell is locked precisely so this can't happen by accident.
 
-The little chart shows all three eras on one price line — the red zone is the data you
-will never see until the leaderboard.
+The chart shows the three eras on one price line. The 2025 test period is evaluated
+privately: you see your scores on the leaderboard, but not the market rows or target values.
 
 ---
 
@@ -143,13 +143,14 @@ the export.
 | `"lstm"` | recurrent net | `seq_len`, `hidden_size`, `num_layers`, `dropout`, `epochs`, `lr`, `batch_size` |
 | `"wildcard"` | GRU *or* 1D-CNN (set `WILDCARD_ARCH`) | GRU knobs or CNN knobs (`channels`, `kernel_size`) |
 
-**How to read the overfit ratio:**
+**How to read the overfit ratio** (`validation MAE / training MAE`):
 
-- ≈ **1×** — healthy (or both are bad; check absolute MAE).
-- **≪ 1×** (train 0.003, val 0.009) — memorising 2014–22 noise. Fix: shallower trees,
-  more dropout, fewer epochs, *better features*.
-- **> 1×** — the model is so regularised it's flatter on training data than on unseen
-  data; usually fine, sometimes a sign of a regime change between train and val.
+- Around **1×** — train and validation errors are similar; still check their absolute values.
+- **Above 1.3×** — validation error is much higher. For example, train MAE 0.003 and
+  validation MAE 0.009 gives a 3× ratio. This can indicate overfitting or a market
+  regime change. Check the features and try a simpler or more regularised model.
+- **Below 1×** — validation error is lower than training error. Different periods and
+  training randomness can cause this; it does not by itself mean the model is over-regularised.
 
 **Sequence models (LSTM/GRU/CNN)** receive the last `seq_len` days *as a sequence*
 rather than one feature row — a genuinely different hypothesis about what information
@@ -180,10 +181,10 @@ team_features.py    your add_features(), copied verbatim from this notebook
 team_models.py      NN classes (only for sequence models)
 ```
 
-Why retrain on train+val for the final model? Because the tournament doesn't care
-about your validation anymore — more data can only help, and the settings are already
-frozen. (This is also why you must freeze your hyperparameters *before* exporting:
-the export snapshot is what plays on 2025.)
+Why retrain on train+validation for the final model? It gives the final fit more
+visible observations after you have chosen its settings. More data can help, but
+markets change, so it does not guarantee a better forecast. Freeze your hyperparameters
+before exporting: that model snapshot is what plays on 2025.
 
 **Checklist before handing in:** correct `ROUND`, correct `TEAM_NAME` (identical both
 rounds), export cell re-run *after* your last change, zip contains `predict.py` +
@@ -199,10 +200,10 @@ score into the marked line before sending. Suggested additions to the prompt if 
 want better answers: ask the AI to rank its suggestions by expected impact, and to flag
 which of its ideas risk time-series leakage.
 
-**The change log** — fill the ✓/✗ table *before* exporting Round 2. The workshop's
-real question isn't "did AI help" but "what did you accept, what did you reject, and
-did your judgement work?". Teams that log honestly have better debrief material than
-teams with a better MAE.
+**The change log** — fill the ✓/✗ table during Round 2. It stays in the notebook and
+is not included in the model ZIP, so keep the notebook available for the debrief.
+The workshop's real question is what you accepted, what you rejected, and whether your
+judgement worked.
 
 **Reminder:** you now know your Round-1 2025 score. Using it as the *only* signal to
 tune against is leaderboard overfitting — the 2026 holdout exists precisely to test

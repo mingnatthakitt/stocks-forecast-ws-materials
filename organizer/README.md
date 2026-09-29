@@ -213,8 +213,10 @@ python leaderboard.py
 
 `evaluate.py` finds the right folder on its own: `--round 1` uses
 `submissions/round1/`, `--round 2` uses `submissions/round2/`, and `--holdout`
-scores **both** rounds together (tagged per round) so the reveal table can show
-each team's human-only *and* human+AI model on 2026. Point it anywhere with
+scores the available submissions from both rounds together (tagged by team and
+round). When a team submitted in both rounds, the reveal table lets you compare
+its human-only and human+AI models on 2026; rows from different teams are not a
+paired AI comparison. Point it anywhere with
 `--submissions <dir>`.
 
 Every team is scored in an isolated subprocess (120 s default timeout). Crashes, NaN
@@ -233,9 +235,11 @@ Ridge 0.01537 · **Random Forest 0.01531 (best)** · XGBoost 0.01538 · LSTM 0.0
 · GRU 0.01624 — per-ticker for the forest: SPY 0.0074 · MSFT 0.0101 · AAPL 0.0126 ·
 NVDA 0.0211 · TSLA 0.0287.
 
-**2026 holdout** (all models, both rounds): baseline **0.01500** · forest 0.01517 ·
-GRU 0.01534 — *every* trained model loses to predicting zero on unseen data. The
-generalisation lesson is baked into the demo.
+**2026 holdout** (prepared demo submissions): baseline **0.01500** · forest 0.01517 ·
+GRU 0.01534 — both prepared model demos lose to predicting zero on unseen data. The
+generalisation lesson is baked into the demo. The forest and GRU figures come from
+Team Example R1 and Team Seq R2, respectively; they are different teams and do not
+form a paired AI comparison.
 
 **Paper trading** (equal-weight $2k/ticker, threshold 0, zero cost): forest
 **+25.71 %** (33 trades) · GRU **+27.46 %** (322 trades, *worst* MAE, best P&L) ·
@@ -483,9 +487,9 @@ Verified:
   the §6 fallback table); the whiteboard deadlines (1:00/1:28 → 1:08/1:34) and the
   surprise-test window; `README.md` and `organizer/README.md` slide counts and the
   `#27r` → `#38r` deep-link example; `participant/README.md` round times and the
-  cheatsheet's export deadlines. `WorkshopOutline.md`'s proposed-schedule table is
-  left as the original design document but is now explicitly marked superseded and
-  pointed at `FACILITATOR_GUIDE.md` §3.
+  cheatsheet's export deadlines. `WorkshopOutline.md` now carries the live 2-hour
+  schedule; the 60-minute competition block runs 0:42–1:42, with 6 minutes for
+  briefing, 36 minutes for model tuning, and 18 minutes for scoring and results.
 
 Open items unchanged: Colab smoke-test of the notebook on the real runtime, and a
 portal test on the venue's actual network (a phone must load the printed URL).

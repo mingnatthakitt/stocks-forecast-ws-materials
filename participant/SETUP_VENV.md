@@ -9,7 +9,7 @@ Colab needs zero installation and is still the recommended path.
 > | OS | Plain venv + pip | What you get |
 > |---|---|---|
 > | **Linux** | ✅ works | all 5 models |
-> | **Windows** | ✅ works | all 5 models (standard combo, not lab-tested here) |
+> | **Windows** | ⚠️ not verified | The pip recipe is documented, but this setup has not been tested on Windows. |
 > | **macOS** | ⚠️ partial | **all models except XGBoost** — the pip wheels of torch and xgboost crash when loaded together on macOS (OpenMP conflict). The notebook tells you this politely and you can compete fully with the other four. |
 >
 > On macOS and you want XGBoost too? Two options: run on **Colab**, or create the env
@@ -45,14 +45,17 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
-Install the packages (the pinned versions the workshop was tested with):
+Install packages by platform (Linux/Colab tested; Windows is documented but not verified):
 
 ```bash
-# Linux only — grab the CPU build of torch first, so pip doesn't pull a
+# Linux — grab the CPU build of torch first, so pip doesn't pull a
 # multi-GB CUDA download you don't need:
 pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
 
 pip install -r requirements.txt
+
+# macOS — use the XGBoost-free package list (see §5):
+pip install -r requirements-macos.txt
 ```
 
 Installation takes a few minutes (torch is the big one).
@@ -66,8 +69,9 @@ Installation takes a few minutes (torch is the big one).
 4. Run the first cell. Expected output: version numbers ending in `setup OK`
    (a yellow note about xgboost is fine on macOS — see below).
 
-Then `Runtime`: `Run All` (~1–2 minutes). You should see five models train and a
-scoreboard appear.
+Then choose `Runtime → Run All` (about 1–3 minutes). You should see the available
+models train and a scoreboard appear. Linux runs all five; the macOS pip setup skips
+XGBoost, as described below.
 
 ## 5 · macOS users: the XGBoost situation
 
@@ -81,7 +85,8 @@ not something you did wrong. The notebook handles it gracefully:
 
 **You can compete fully without XGBoost**: Ridge, Random Forest, LSTM and the
 Wildcard (GRU/CNN) all train and export exactly the same way. Tell your facilitator
-you're an "XGBoost-free" team so the model draft accounts for it.
+if XGBoost is unavailable; focus slots guide tuning and do not restrict which model
+you may submit.
 
 Want the full five? Either run on **Colab**, or use miniforge instead of venv —
 then keep using VS Code exactly as above:
@@ -90,7 +95,7 @@ then keep using VS Code exactly as above:
 # one-time: install miniforge (https://github.com/conda-forge/miniforge), then:
 conda create -n stocks-ml python=3.12 -c conda-forge
 conda activate stocks-ml
-python -m pip install torch xgboost scikit-learn pandas matplotlib yfinance joblib ipykernel
+conda install -c conda-forge pytorch xgboost scikit-learn pandas matplotlib yfinance joblib ipykernel jupyterlab
 ```
 conda-forge builds torch and xgboost against one shared OpenMP, so they coexist
 happily. In VS Code, pick the `stocks-ml` interpreter — identical workflow.

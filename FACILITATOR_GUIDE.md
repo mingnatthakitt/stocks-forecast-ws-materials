@@ -43,7 +43,7 @@ Everything the two workshop leads and the floating facilitators need to run the
       `python collect.py --import /Volumes/<STICK>/<their>.zip`
 - [ ] Facilitators have: this guide, the evaluation command list (§4), the cheatsheet
 - [ ] Write on the whiteboard: round deadlines (1:08 / 1:34), the portal URL + PIN, and
-      the team/model draft board
+      the team/model focus board
 - [ ] Sanctioned Colab fallback link ready in case local Python fails for someone
 
 ---
@@ -66,6 +66,9 @@ xgboost-imported-before-torch for local users.
 > Slide numbers refer to `slides/index.html` (1–42). Split sections between the two
 > leads; the non-speaking lead runs the leaderboard/eval pipeline.
 >
+> **Competition block: 0:42–1:42 (60 minutes total)** — 6 minutes briefing,
+> 36 minutes of model optimisation, and 18 minutes for evaluation and results.
+>
 > **MUST** = the room is lost without it. **IF TIME** = cut these first if you're
 > running late; the slide stays in the deck, you just talk over it faster or skip
 > to the next. The five `· in plain terms` slides and `Which model do I pick?`
@@ -76,8 +79,9 @@ xgboost-imported-before-torch for local users.
 - **S1–2** Welcome; the two-round contract (human-only, then AI unlocked). *Point at the
   room: "you are the control group."*
 - **S3–5** The three vote charts. Run each: show chart → hands up UP vs DOWN →
-  press **R** to reveal. Real windows: Q4-2018 crash→recovery (UP +13%), COVID 2020
-  (UP after the hidden point), 2023 AI rally (UP). Keep the tempo fast and loud.
+  press **R** to reveal. The deck shows AAPL Sep 2018–Mar 2019 (+20.9% after the
+  hidden December point), NVDA Jan–Jun 2022 (−18.2% after the hidden April point),
+  then TSLA Jan–Jun 2020 (+148.7% after 20 March). Keep the tempo fast and loud.
 - **S6** Debrief: humans are coin-flips here; mention that professionals fail too.
 - **S7** State the central question and today's experiment design.
 
@@ -102,8 +106,8 @@ xgboost-imported-before-torch for local users.
 - **S14** The timeline — the most important slide of the first half hour. Drill:
   train/validate/private, "2025 labels do not exist for you."
 - **S15** Baselines. Land the punchline: **predict-0 is the bar** (≈ 0.0162 pooled on
-  2025, ≈ 0.0154 on validation — say the numbers out loud). Mention the difficulty
-  gradient: SPY ≈ 0.007, TSLA ≈ 0.029 per-ticker MAE for the same model.
+  2025, ≈ 0.0154 on validation — say the numbers out loud). The zero-baseline
+  per-ticker MAE ranges from SPY ≈ 0.0075 to TSLA ≈ 0.0291.
 
 ### 0:19–0:42 · Crash course — slides 16–28  *(23 min)*
 Don't lecture. Give each model its *personality* (the S-numbered slide), then its
@@ -127,7 +131,7 @@ questions: **what it does → what it cannot express → when to reach for it.**
   and the three gates spelled out as three yes/no questions per day
   (forget? / write? / use?). Include the memorisation warning — it is the easiest
   model here to memorise with, and that is the honest limit.
-- **S24** Wildcard GRU/CNN — one line switches them; capped in the draft.
+- **S24** Wildcard GRU/CNN — one line switches them; it has focus slots on the board.
 - **S25 · IF TIME** *GRU vs CNN, in plain terms.* Two gates vs three; the CNN's
   stencil sliding across the window. Fine to compress to one sentence each.
 - **S26 · IF TIME (but it's the thesis)** *Which model do I pick?* The decision
@@ -141,10 +145,13 @@ questions: **what it does → what it cannot express → when to reach for it.**
   locked for a reason; if AI suggests shuffling in Round 2, that's a rejection.*
 
 ### 0:42–0:48 · Briefing + notebook tour — slides 29–30
-- **S29** Teams of 3–5, primary + secondary architecture, draft caps on the whiteboard
-  (Ridge 2 / Forest 2 / XGB 3 / LSTM 3 / Wildcard 2). Fill the draft board live.
+- **S29** Teams of 3–5, primary + secondary architecture, focus slots on the whiteboard
+  (Ridge 2 / Forest 2 / XGB 3 / LSTM 3 / Wildcard 2). These slots guide which models
+  teams focus on; the standard Colab/Conda setup trains all five starters, and teams
+  can export whichever available architecture has the best validation MAE.
 - **S30** Notebook tour: green banners = playground, locked = infra, the one API call,
-  "Run all trains all five models in 1–3 minutes". Teams open the notebook now.
+  "Run all trains all five models in 1–3 minutes on Colab/Conda". The macOS pip venv
+  skips XGBoost. Teams open the notebook now.
 
 ### 0:48–1:08 · ROUND 1 — slide 31
 - Kick the timer visible. Facilitators circulate; enforce no-AI.
@@ -156,9 +163,9 @@ questions: **what it does → what it cannot express → when to reach for it.**
 
 ### 1:08–1:18 · Private 2025 evaluation — slide 32 + live leaderboard
 - **S32** Metrics explainer while organisers run the eval (§4).
-- Reveal Round-1 leaderboard. Read the top 3 aloud. *Expected shape:* most teams
-  cluster at 0.0070–0.0078; somebody may not beat the baseline — say "normal, and
-  educational" out loud.
+- Reveal Round-1 leaderboard. Read the top 3 aloud. Do not promise a tight score
+  cluster: the prepared zero baseline is 0.01621 pooled and the forest demo is
+  0.01598. Some teams may not beat the baseline — say "normal, and educational" out loud.
 
 ### 1:18–1:34 · ROUND 2 — slides 33–36
 - **S33** AI unlocked rules: prompt cell auto-fills; paste your Round-1 2025 score in.
@@ -166,7 +173,8 @@ questions: **what it does → what it cannot express → when to reach for it.**
 - **S35** Change log is mandatory — the debrief feeds on it.
 - **S36** Benchmark overfitting warning. Frame: "you now know your 2025 score; tuning
   against it is allowed but will be tested against something it never saw."
-- **1:34 hard stop:** export with `ROUND = 2`.
+- **1:34 hard stop:** export with `ROUND = 2`. The change log stays in the notebook,
+  not the model ZIP; ask teams to keep it available for the debrief.
 
 ### 1:34–1:42 · Second evaluation + paper trading + holdout — slides 37–38
 - Run eval round 2 → refresh leaderboard (Δ column tells the story per team).
@@ -174,10 +182,11 @@ questions: **what it does → what it cannot express → when to reach for it.**
 - **S37** Accuracy ≠ profit — this is where S26's thesis gets cashed out.
 - **S38** The 2026 holdout reveal — run
   `python organizer/evaluate.py --holdout` live if time allows (it's fast); the
-  leaderboard's holdout table shows whether Round-2 gains transferred.
+  leaderboard's holdout table shows whether Round-2 gains transferred. Compare
+  Round 1 and Round 2 only for teams with both submissions.
 
 ### 1:42–1:50 · Debrief — slides 39–40
-- **S39** Discussion prompts; have the winning team walk their change log.
+- **S39** Discussion prompts; have the winning team walk their notebook change log.
 - **S40** The eight takeaways — don't read them; ask the room to guess each one first.
 
 ### 1:50–2:00 · Conclusion — slides 41–42
@@ -299,8 +308,10 @@ regenerate data after new market days:
 
 `--holdout` scores every model — Round 1 and Round 2 together — and tags each entry
 with its round, so the reveal table fills both the *Human-only* and *Human + AI*
-column groups. Every model loses to predict-0 on 2026 (0.01500); that is the point
-of the reveal.
+column groups when a team has both submissions. The prepared forest result is
+Team Example R1 and the GRU result is Team Seq R2; those are different teams, not a
+paired AI comparison. Both prepared model demos lose to predict-0 on 2026 (0.01500);
+the other architectures were not scored in these demo submissions.
 
 Per-ticker 2025 MAE for the forest: SPY 0.0074 · MSFT 0.0101 · AAPL 0.0126 ·
 NVDA 0.0211 · TSLA 0.0287 — quote the gradient to explain why pooled MAE looks "big".
@@ -331,7 +342,7 @@ Paper trading (equal-weight $2k per ticker, threshold 0, zero cost): forest
 | "predict() returns NaN" | cold-start rows | rows before warm-up must predict `0.0` (predict.py handles gaps if features do) |
 | "Can we blend models?" | ensembling | allowed if both models are yours and predict.py stays self-contained |
 | "Can we download other data?" | external features | **no** — same-dataset fairness; engineered features from OHLCV only |
-| "I'm on a local venv and XGBoost won't install" | macOS pip conflict (torch/xgboost) | expected — they compete with ridge/forest/lstm/wildcard; the notebook explains it. Adjust the draft caps so XGBoost slots go to Colab teams, and remember the workshop is still fair: all teams use the same data and metric |
+| "I'm on a local venv and XGBoost won't install" | macOS pip conflict (torch/xgboost) | use the Miniforge instructions or Colab; focus slots guide tuning, but all teams can train and submit any available starter model |
 
 Round-1 policing: participants closing a ChatGPT tab when you walk by is the norm —
 a friendly "this is the human round" suffices. Log nothing, shame no one.
@@ -348,7 +359,7 @@ a friendly "this is the human round" suffices. Log nothing, shame no one.
 | Someone's laptop dies | pair them into another team; 4 is still fine |
 | Evaluation crashes for one team | it becomes a DNF row; the workshop continues — fix after |
 | Colab quota / slow runtime | CPU-only is enough; if desperate, Ridge/Forest/XGB cells alone are a complete workshop |
-| Odd team count / draft collision | wildcard caps are flexible; two teams may share an arch with different feature sets |
+| Several teams choose the same focus | keep the focus slots flexible; any team can train and submit any available starter model |
 | Running 10 min late | Cut in this order: **S25** (GRU vs CNN) → **S13** (the pipeline, one sentence per box) → the holdout live-run (precompute it). **Never cut the debrief.** If the room has no ML background, cut nothing in the 0:06–0:19 block — that's the block doing the teaching. |
 
 ---
@@ -357,5 +368,5 @@ a friendly "this is the human round" suffices. Log nothing, shame no one.
 
 - [ ] Archive `organizer/results/` (leaderboard.html + JSONs) and the submissions folder
 - [ ] Send teams their change logs back with the holdout numbers — the follow-up email writes itself
-- [ ] Note which models won; adjust next cohort's draft caps (e.g. if XGBoost sweeps, cap it at 2)
+- [ ] Note which models won; adjust next cohort's focus-slot guidance based on what teams chose and learned
 - [ ] If 2026 data has grown by the next run, `prepare_data.py` regenerates everything

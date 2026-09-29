@@ -1,11 +1,11 @@
 # Can AI Predict the Market? — Workshop Material
 
-A complete material set for a **2-hour, hands-on ML stock-forecasting workshop**
-(HKU InnoWing): teams build next-day-return models for a five-instrument panel
+A complete material set for a **2-hour, hands-on ML stock-forecasting workshop**.
+**Event venue: HKU InnoWing.** Teams build next-day-return models for a five-instrument panel
 (**SPY, NVDA, AAPL, MSFT, TSLA**), compete on a **private 2025 test set** in a
 *human-only* round and a *human+AI* round, then find out whether AI-assisted
-optimisation actually helped — and whether the gains survive a 2026 holdout nobody
-optimised against.
+optimisation helped for teams that submitted in both rounds — and whether their
+gains survive a 2026 holdout nobody optimised against.
 
 Educational exercise only: historical data, virtual portfolios, no investment advice.
 
@@ -27,6 +27,7 @@ else stays with the organisers.**
 | `participant/README.md` | Quick-start + competition summary for attendees. |
 | `participant/SETUP_VENV.md` | Local install guide for VS Code + venv users (macOS caveats: XGBoost excluded there, or use Colab/miniforge). |
 | `participant/requirements.txt` | Pinned pip packages for that local install (synced copy of the root file). |
+| `participant/requirements-macos.txt` | macOS pip packages for the local install; omits XGBoost because of the torch/OpenMP conflict. |
 | `participant/exports/` | Demo submission zips (what "done" looks like). |
 
 ### 🎓 TEACHING — presenters and facilitators
@@ -51,7 +52,7 @@ else stays with the organisers.**
 | `organizer/private/` | 🔒 **Never distribute**: 2025 labels + 2026 holdout. |
 | `organizer/submissions/`, `organizer/results/` | Where team zips land / where scoring output goes (demo contents included). |
 | `submission_template/` | Readable reference of the locked submission interface (`predict(df) -> pd.Series`). |
-| `environment.yml` / `environment.lock.yml` / `requirements.txt` | Conda env spec, pinned solve, and pip alternative (**pip path is Linux/Colab-only — macOS must use conda**). |
+| `environment.yml` / `environment.lock.yml` / `requirements.txt` | Conda env spec, pinned solve, and pip alternative (Linux/Colab tested; Windows documented but not verified; macOS needs conda/miniforge for XGBoost). |
 
 ---
 
@@ -63,18 +64,19 @@ else stays with the organisers.**
 ├── FACILITATOR_GUIDE.md          🎓 run-of-show for presenters/facilitators
 ├── environment.yml               🛠 conda env spec (name: stocks-ml, all conda-forge)
 ├── environment.lock.yml          🛠 pinned solve of a known-good environment
-├── requirements.txt              🛠 pip equivalent (Linux/Colab only — see warning inside)
+├── requirements.txt              🛠 pip equivalent (Linux/Colab tested; Windows not verified)
 │
 ├── slides/                       🎓 teaching
 │   └── index.html                42-slide dark trading-terminal deck
 │
 ├── participant/                  👥 distribute this whole folder to teams
 │   ├── README.md                 attendee quick start
-│   ├── workshop.ipynb            starter notebook (executes end-to-end, ~1 min on CPU)
+│   ├── workshop.ipynb            starter notebook (executes end-to-end, about 1–3 min on CPU)
 │   ├── GUIDE.md                  notebook walkthrough with the "why"
 │   ├── CHEATSHEET.md             in-competition quick reference
 │   ├── SETUP_VENV.md             VS Code + venv local install guide (macOS caveats)
 │   ├── requirements.txt          synced copy of the root pip file
+│   ├── requirements-macos.txt   macOS pip list without XGBoost
 │   ├── data/workshop_participant.csv
 │   └── exports/                  demo submission zips
 │
@@ -93,7 +95,7 @@ else stays with the organisers.**
 ### Participants
 Open `participant/README.md`. Short version: upload `workshop.ipynb` to
 [Colab](https://colab.research.google.com), upload `data/workshop_participant.csv`
-when prompted, `Runtime → Run all` (~1 min), read `GUIDE.md` alongside, keep
+when prompted, `Runtime → Run all` (about 1–3 min), read `GUIDE.md` alongside, keep
 `CHEATSHEET.md` open during rounds.
 
 ### Organisers (one-time setup)
@@ -134,7 +136,7 @@ the condensed command sequence. Projector: `slides/index.html` +
 |---|---|---|
 | 2014–2022 | training | participants |
 | 2023–2024 | validation/tuning | participants |
-| 2025 | private competition set | organisers only (labels hidden) |
+| 2025 | private competition set | not distributed; evaluator passes features to submissions and reveals scores only (labels stay private) |
 | 2026 YTD | surprise generalisation holdout | organisers only, revealed at the end |
 
 Data: long-format OHLCV panel (Date × Ticker), split/dividend-adjusted — NVDA (10:1
@@ -163,9 +165,10 @@ RMSE, directional accuracy and per-ticker MAE are shown as diagnostics.
   degrades to a graceful DNF row); notebook also executed under pandas 2.2.3
   (Colab's version); slides screenshot-verified. Full log: `organizer/README.md` §8.
 
-Demo results live in `organizer/results/` with three demo submissions
-(`TeamZero` = baseline, `Team Example` = random forest round 1, `Team Seq` = GRU
-round 2). Wipe before the real event — keep the folders themselves:
+Demo results live in `organizer/results/`: `TeamZero` is the baseline, `Team Example`
+is a Random Forest submission for Round 1, and `Team Seq` is a GRU submission for
+  Round 2. They are different teams, so these scores are not a paired AI comparison.
+Wipe the demo files before the event, keeping the folders themselves:
 `rm -rf organizer/results/*` and `rm -f organizer/submissions/round*/*`.
 
 ## Regenerating / customising
